@@ -9,7 +9,7 @@ export const site = {
   name: 'The Portcullis',
   tagline: 'Great Food, Good Times, and a Place for Every Occasion',
   description:
-    'The Portcullis — a warm, welcoming pub & restaurant in Arbroath. Great food, weekly deals, bingo nights, a games room and a function suite for every occasion.',
+    'The Portcullis, a warm, welcoming pub & restaurant in Arbroath. Great food, weekly deals, bingo nights, a games room and a function suite for every occasion.',
   url: 'https://portcullis-arbroath.co.uk',
 
   phone: '01241 463117',
@@ -30,17 +30,17 @@ export const site = {
   // Existing function/events enquiry form on the old site (kept as-is).
   functionBookingUrl: 'https://portcullis-arbroath.co.uk/function-booking/',
 
-  // Opening hours — PLACEHOLDER. Replace with real hours.
+  // Opening hours, PLACEHOLDER. Replace with real hours.
   // Used both for display and for the schema.org structured data.
   hours: [
-    { days: 'Monday – Thursday', time: '12:00 – 23:00' },
-    { days: 'Friday – Saturday', time: '12:00 – 00:00' },
-    { days: 'Sunday', time: '12:00 – 23:00' },
+    { days: 'Monday - Thursday', time: '12:00 - 23:00' },
+    { days: 'Friday - Saturday', time: '12:00 - 00:00' },
+    { days: 'Sunday', time: '12:00 - 23:00' },
   ],
 } as const;
 
 // Real social profiles (pulled from the current site). All rendered in a single
-// flat burgundy — see SocialLinks.astro.
+// flat burgundy, see SocialLinks.astro.
 export const socials = [
   {
     name: 'Facebook',
@@ -72,7 +72,7 @@ export const images = {
 
 // The four printed menus, used to build the menu cards + separate pages.
 export const menus = [
-  { slug: 'main', title: 'Main Menu', blurb: 'Our full à la carte — pub classics done properly.' },
+  { slug: 'main', title: 'Main Menu', blurb: 'Our full à la carte, pub classics done properly.' },
   { slug: 'oap', title: 'OAP Menu', blurb: 'Smaller plates and great value for our over-60s.' },
   { slug: 'kids', title: 'Kids Menu', blurb: 'Little favourites the whole family will love.' },
   { slug: 'specials', title: 'Specials', blurb: 'Our current deals and chef’s specials.' },

@@ -1,5 +1,5 @@
 /* =====================================================================
-   The Portcullis — global styles & design tokens
+   The Portcullis, global styles & design tokens
    Tailwind v4 (CSS-first config). Brand colours are defined ONCE here as
    theme tokens and reused everywhere as utilities (bg-porty-red, text-porty-gold…)
    and as raw CSS variables (var(--porty-red)). Never hardcode the hex inline.
@@ -8,11 +8,11 @@
 @import 'tailwindcss';
 
 @theme {
-  /* --- Brand colours (exact values — do not approximate) --- */
+  /* --- Brand colours (exact values, do not approximate) --- */
   --color-porty-red: #6b1220; /* primary Portcullis red */
-  --color-porty-dark: #5c0e17; /* darker panel red — specials/footer blocks */
+  --color-porty-dark: #5c0e17; /* darker panel red, specials/footer blocks */
   --color-porty-cream: #f7f3ea; /* cream background */
-  --color-porty-gold: #e8c55f; /* gold crest accent — small highlights/dividers */
+  --color-porty-gold: #e8c55f; /* gold crest accent, small highlights/dividers */
 
   /* --- Type --- */
   --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
@@ -33,11 +33,14 @@
     scroll-behavior: smooth;
     /* offset anchor targets so they aren't hidden behind the sticky header */
     scroll-padding-top: 5rem;
+    /* belt-and-braces: never allow a stray element to cause sideways scroll on mobile */
+    overflow-x: clip;
   }
 
   body {
     background-color: var(--color-porty-cream);
     color: var(--color-porty-dark);
+    overflow-x: clip;
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -92,6 +95,22 @@
 [data-reveal].is-visible {
   opacity: 1;
   transform: none;
+}
+
+/* Hero entrance: one orchestrated, staggered load (delays set inline). */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-rise {
+  opacity: 0;
+  animation: hero-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 /* Respect users who prefer reduced motion: no transforms, no smooth scroll */

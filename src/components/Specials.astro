@@ -1,5 +1,5 @@
 ---
-/* Weekly Specials — CMS-driven. Reads the `specials` collection and shows each
+/* Weekly Specials, CMS-driven. Reads the `specials` collection and shows each
    as a card. Edited by the owner at /admin. */
 import { getCollection } from 'astro:content';
 import PortcullisDivider from './PortcullisDivider.astro';
@@ -19,7 +19,7 @@ const specials = (await getCollection('specials')).sort(
         Weekly Specials
       </h2>
       <p class="mt-4 text-lg text-porty-cream/80">
-        Our regular deals — from pensioner lunches to midweek treats and kids
+        Our regular deals, from pensioner lunches to midweek treats and kids
         eating free.
       </p>
       <PortcullisDivider class="mt-6" />

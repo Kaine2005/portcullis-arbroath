@@ -31,17 +31,20 @@ import BookButton from './BookButton.astro';
 
   <!-- Content -->
   <div class="relative mx-auto w-full max-w-7xl px-4 pb-14 pt-28 sm:px-6 sm:pb-20 lg:pb-24">
-    <p class="mb-3 font-body text-sm font-semibold uppercase tracking-[0.28em] text-porty-gold">
-      Arbroath · Est. Your Local
+    <p class="hero-rise mb-3 font-body text-xs font-semibold uppercase tracking-[0.28em] text-porty-gold sm:text-sm" style="animation-delay:0.05s">
+      Pub · Kitchen · Function Suite
     </p>
-    <h1 class="max-w-3xl font-display text-5xl font-semibold leading-[1.02] text-porty-cream drop-shadow-sm sm:text-6xl lg:text-7xl">
+    <h1 class="hero-rise max-w-3xl font-display text-[3.25rem] font-semibold leading-[1.02] text-porty-cream drop-shadow-sm sm:text-6xl lg:text-7xl" style="animation-delay:0.15s">
       The Portcullis
     </h1>
-    <p class="mt-4 max-w-xl font-display text-xl italic text-porty-cream/95 sm:text-2xl">
-      {site.tagline}
-    </p>
+    <div class="hero-rise mt-5 flex items-center gap-3" style="animation-delay:0.3s">
+      <span class="h-0.5 w-12 rounded bg-porty-gold"></span>
+      <p class="max-w-xl font-display text-xl italic text-porty-cream/95 sm:text-2xl">
+        {site.tagline}
+      </p>
+    </div>
 
-    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+    <div class="hero-rise mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style="animation-delay:0.45s">
       <BookButton size="lg" variant="gold" />
       <a
         href={site.phoneHref}

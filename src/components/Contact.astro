@@ -1,10 +1,10 @@
 ---
-/* Find Us / Contact — address, tap-to-call, email, opening hours, embedded map,
+/* Find Us / Contact, address, tap-to-call, email, opening hours, embedded map,
    flat-burgundy socials, and a lightweight booking/contact form.
 
    FORM HANDLING:
    - Primary: Netlify Forms (the data-netlify attributes below). On Netlify this
-     just works — submissions appear in your dashboard and can email
+     just works, submissions appear in your dashboard and can email
      contact@portcullis-arbroath.co.uk (set up in Netlify > Forms > Notifications).
    - Fallback: Formspree. If you are NOT on Netlify, delete the two data-netlify
      lines + the hidden inputs, and set:
@@ -70,7 +70,7 @@ const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
 
           <h3 class="font-display text-lg font-semibold text-porty-red">Opening Hours</h3>
           <p class="mt-1 text-xs font-medium uppercase tracking-wide text-porty-dark/50">
-            Placeholder — please confirm your real hours
+            Placeholder, please confirm your real hours
           </p>
           <dl class="mt-3 divide-y divide-porty-red/10">
             {
@@ -104,7 +104,7 @@ const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
       <div data-reveal class="rounded-3xl bg-porty-dark p-6 text-porty-cream shadow-xl sm:p-8">
         <h3 class="font-display text-2xl font-semibold">Book a Table</h3>
         <p class="mt-2 text-porty-cream/80">
-          The quickest way to book is WhatsApp — or send us the details below and
+          The quickest way to book is WhatsApp, or send us the details below and
           we'll be in touch.
         </p>
         <BookButton class="mt-4" variant="gold" />

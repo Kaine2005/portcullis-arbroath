@@ -1,5 +1,5 @@
 /* =====================================================================
-   Content collections — the owner-editable content.
+   Content collections, the owner-editable content.
    Each collection reads markdown files from src/content/* . The /admin
    editor (Decap CMS) writes to these same files, so any edit made in the
    browser lands here as a normal file change and auto-deploys.
@@ -9,20 +9,20 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-// WEEKLY SPECIALS — e.g. Pensioner Lunch, Children Eat Free, Weekday Deal
+// WEEKLY SPECIALS, e.g. Pensioner Lunch, Children Eat Free, Weekday Deal
 const specials = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/specials' }),
   schema: z.object({
     title: z.string(),
     emoji: z.string().optional(), // small decorative emoji, e.g. 🍽️
-    days: z.string().optional(), // e.g. "Mon–Fri" or "Every Wednesday"
-    times: z.string().optional(), // e.g. "12–2pm"
+    days: z.string().optional(), // e.g. "Mon-Fri" or "Every Wednesday"
+    times: z.string().optional(), // e.g. "12-2pm"
     description: z.string(),
     order: z.number().default(0), // lower numbers show first
   }),
 });
 
-// UPCOMING EVENTS — e.g. Bingo nights, band nights
+// UPCOMING EVENTS, e.g. Bingo nights, band nights
 const events = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/events' }),
   schema: z.object({
@@ -38,7 +38,7 @@ const events = defineCollection({
   }),
 });
 
-// MENU ITEMS — one file per dish. `menu` decides which page it appears on.
+// MENU ITEMS, one file per dish. `menu` decides which page it appears on.
 const menu = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/menu' }),
   schema: z.object({

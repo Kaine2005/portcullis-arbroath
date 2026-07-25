@@ -21,7 +21,7 @@ const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · Arbroath
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 const ogImageUrl = new URL(ogImage, Astro.site ?? site.url).href;
 
-// schema.org Restaurant structured data — helps Google show address, phone,
+// schema.org Restaurant structured data, helps Google show address, phone,
 // hours and stars. Hours are mapped from the config.
 const openingHours = site.hours.map((h) => `${h.days}: ${h.time}`);
 const restaurantSchema = {
