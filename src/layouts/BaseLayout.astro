@@ -1,0 +1,123 @@
+---
+/* Base HTML shell: <head> meta, fonts, SEO/Open Graph, schema.org data,
+   and the shared scroll-reveal script. Every page uses this. */
+import { site, images } from '../config/site';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /* Absolute-from-root path to the image for social sharing previews */
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = site.description,
+  ogImage = images.hero,
+} = Astro.props;
+
+const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · Arbroath`;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
+const ogImageUrl = new URL(ogImage, Astro.site ?? site.url).href;
+
+// schema.org Restaurant structured data — helps Google show address, phone,
+// hours and stars. Hours are mapped from the config.
+const openingHours = site.hours.map((h) => `${h.days}: ${h.time}`);
+const restaurantSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: site.name,
+  description: site.description,
+  servesCuisine: 'British',
+  url: site.url,
+  telephone: site.phone,
+  email: site.email,
+  image: ogImageUrl,
+  priceRange: '££',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.town,
+    postalCode: site.address.postcode,
+    addressCountry: site.address.country,
+  },
+  openingHours,
+};
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href={images.logo} />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#6B1220" />
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="en_GB" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Fonts: Fraunces (warm display serif) + Karla (clean body sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600;9..144,700&family=Karla:wght@300..700&display=swap"
+    />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(restaurantSchema)} />
+
+    <!-- If JS is disabled, reveal-on-scroll elements must still be visible -->
+    <noscript>
+      <style>
+        [data-reveal] { opacity: 1 !important; transform: none !important; }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-porty-red focus:px-4 focus:py-2 focus:text-porty-cream"
+      >Skip to content</a
+    >
+    <slot />
+
+    <!-- Scroll reveal: adds .is-visible as elements enter the viewport -->
+    <script>
+      const els = document.querySelectorAll('[data-reveal]');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

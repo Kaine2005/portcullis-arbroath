@@ -1,0 +1,23 @@
+# Netlify configuration — RECOMMENDED host for this site.
+# Netlify gives you, for free:
+#   1. The /admin editor login (via Netlify Identity + Git Gateway)
+#   2. Form handling for the contact/booking form (Netlify Forms)
+# See README "Deploying" for the one-time setup clicks.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Nice, cache-friendly headers for the optimised static assets.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

@@ -1,0 +1,61 @@
+---
+import { site, images } from '../config/site';
+import SocialLinks from './SocialLinks.astro';
+
+const year = new Date().getFullYear();
+const links = [
+  { label: 'About', href: '/#about' },
+  { label: 'Menus', href: '/#menus' },
+  { label: 'Specials', href: '/#specials' },
+  { label: "What's On", href: '/#events' },
+  { label: 'Functions', href: '/#functions' },
+  { label: 'Find Us', href: '/#contact' },
+];
+---
+
+<footer class="bg-porty-dark text-porty-cream">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
+    <div>
+      <div class="flex items-center gap-3">
+        <img src={images.logo} alt="" width="44" height="44" class="h-11 w-11 object-contain" onerror="this.style.display='none'" />
+        <span class="font-display text-2xl font-semibold text-porty-cream">The Portcullis</span>
+      </div>
+      <p class="mt-4 max-w-xs font-display text-lg italic text-porty-cream/80">
+        {site.tagline}
+      </p>
+      <SocialLinks class="mt-5 [&_a]:text-porty-cream [&_a:hover]:text-porty-gold" />
+    </div>
+
+    <div>
+      <h3 class="font-body text-xs font-bold uppercase tracking-[0.22em] text-porty-gold">Explore</h3>
+      <ul class="mt-4 space-y-2">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} class="text-porty-cream/85 transition-colors hover:text-porty-gold">{l.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-body text-xs font-bold uppercase tracking-[0.22em] text-porty-gold">Visit &amp; Contact</h3>
+      <address class="mt-4 not-italic leading-relaxed text-porty-cream/85">
+        {site.address.street}<br />
+        {site.address.town}, {site.address.postcode}
+      </address>
+      <p class="mt-3 space-y-1">
+        <a href={site.phoneHref} class="block font-semibold text-porty-cream hover:text-porty-gold">{site.phone}</a>
+        <a href={`mailto:${site.email}`} class="block break-words text-porty-cream/85 hover:text-porty-gold">{site.email}</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="border-t border-porty-cream/10">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-sm text-porty-cream/60 sm:flex-row sm:px-6">
+      <p>&copy; {year} The Portcullis, Arbroath. All rights reserved.</p>
+      <p>Bar staff / manager? <a href="/admin/" class="underline underline-offset-2 hover:text-porty-gold">Edit the site</a></p>
+    </div>
+  </div>
+</footer>

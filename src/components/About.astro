@@ -1,0 +1,43 @@
+---
+/* Welcome / About — warm intro with the al-fresco outdoor seating angle. */
+import { images } from '../config/site';
+import PortcullisDivider from './PortcullisDivider.astro';
+---
+
+<section id="about" class="mx-auto max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 sm:py-24">
+  <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+    <div data-reveal>
+      <p class="eyebrow">Welcome</p>
+      <h2 class="mt-3 font-display text-3xl font-semibold text-porty-red sm:text-4xl">
+        Your warm welcome in the heart of Arbroath
+      </h2>
+      <div class="mt-5 space-y-4 text-lg leading-relaxed text-porty-dark/85">
+        <p>
+          The Portcullis is more than a pub — it's a proper local. Whether you're
+          in for a hearty lunch, a catch-up over a pint, or a big family
+          celebration, you'll find good food, a friendly welcome and a place for
+          every occasion.
+        </p>
+        <p>
+          When the sun's out, settle in at our <strong>al-fresco outdoor
+          seating</strong> and watch Arbroath go by. Inside, it's cosy, characterful
+          and always buzzing — from our weekly deals and bingo nights to the
+          games room and function suite.
+        </p>
+      </div>
+      <PortcullisDivider class="mt-8 !justify-start" />
+    </div>
+
+    <div data-reveal class="overflow-hidden rounded-3xl shadow-xl shadow-porty-red/10 ring-1 ring-porty-red/10">
+      <img
+        src={images.about}
+        alt="The warm interior of The Portcullis restaurant"
+        class="h-full w-full object-cover"
+        loading="lazy"
+        decoding="async"
+        width="1200"
+        height="900"
+      />
+    </div>
+  </div>
+</section>

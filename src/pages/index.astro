@@ -1,0 +1,29 @@
+---
+/* Homepage — single-page scroll with anchored sections. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import MenusSection from '../components/MenusSection.astro';
+import Specials from '../components/Specials.astro';
+import Events from '../components/Events.astro';
+import Functions from '../components/Functions.astro';
+import GamesRoom from '../components/GamesRoom.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout>
+  <Header />
+  <main id="main">
+    <Hero />
+    <About />
+    <MenusSection />
+    <Specials />
+    <Events />
+    <Functions />
+    <GamesRoom />
+    <Contact />
+  </main>
+  <Footer />
+</BaseLayout>

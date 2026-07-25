@@ -1,0 +1,49 @@
+# Deploy to GitHub Pages.
+# This is the SECONDARY option. Netlify is recommended (see README) because it
+# gives the /admin editor login and form handling for free. GitHub Pages works
+# fine for the public site, but the /admin editor needs extra OAuth setup.
+#
+# Before this works:
+#   1. Repo Settings > Pages > Build and deployment > Source = "GitHub Actions".
+#   2. If deploying to a PROJECT url (user.github.io/<repo>), set `base` in
+#      astro.config.mjs to "/<repo>" and redeploy. For a custom domain or a
+#      user/organisation site, leave `base` unset.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install, build, and upload the Astro site
+        uses: withastro/action@v3
+        # with:
+        #   node-version: 20
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

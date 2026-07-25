@@ -1,0 +1,71 @@
+---
+/* Upcoming Events — CMS-driven. Reads the `events` collection. Each event may
+   be recurring or a one-off date, and may have an optional image. */
+import { getCollection } from 'astro:content';
+import PortcullisDivider from './PortcullisDivider.astro';
+
+const events = (await getCollection('events')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const fmtDate = (d?: Date) =>
+  d
+    ? new Intl.DateTimeFormat('en-GB', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+      }).format(d)
+    : undefined;
+---
+
+<section id="events" class="mx-auto max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 sm:py-24">
+  <div class="mx-auto max-w-2xl text-center" data-reveal>
+    <p class="eyebrow">What's On</p>
+    <h2 class="mt-3 font-display text-3xl font-semibold text-porty-red sm:text-4xl">
+      Upcoming Events
+    </h2>
+    <p class="mt-4 text-lg text-porty-dark/80">
+      There's always something happening at The Portcullis. Here's what's coming up.
+    </p>
+    <PortcullisDivider class="mt-6" />
+  </div>
+
+  <div class="mt-12 grid gap-6 md:grid-cols-2">
+    {
+      events.map((e) => (
+        <article
+          data-reveal
+          class="flex flex-col overflow-hidden rounded-3xl border border-porty-red/10 bg-white shadow-sm md:flex-row"
+        >
+          {e.data.image && (
+            <img
+              src={e.data.image}
+              alt={e.data.title}
+              class="h-48 w-full object-cover md:h-auto md:w-40 md:shrink-0"
+              loading="lazy"
+              decoding="async"
+              width="320"
+              height="320"
+            />
+          )}
+          <div class="flex flex-1 flex-col p-6">
+            <span class="inline-flex w-fit items-center gap-2 rounded-full bg-porty-gold/20 px-3 py-1 text-sm font-semibold text-porty-red">
+              {e.data.recurring ?? fmtDate(e.data.date) ?? 'See details'}
+            </span>
+            <h3 class="mt-3 font-display text-2xl font-semibold text-porty-red">
+              {e.data.title}
+            </h3>
+            {e.data.times && (
+              <p class="mt-1 text-sm font-medium text-porty-dark/70">
+                {e.data.times}
+              </p>
+            )}
+            <p class="mt-3 leading-relaxed text-porty-dark/85">
+              {e.data.description}
+            </p>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

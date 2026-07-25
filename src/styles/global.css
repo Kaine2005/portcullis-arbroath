@@ -1,0 +1,111 @@
+/* =====================================================================
+   The Portcullis — global styles & design tokens
+   Tailwind v4 (CSS-first config). Brand colours are defined ONCE here as
+   theme tokens and reused everywhere as utilities (bg-porty-red, text-porty-gold…)
+   and as raw CSS variables (var(--porty-red)). Never hardcode the hex inline.
+   ===================================================================== */
+
+@import 'tailwindcss';
+
+@theme {
+  /* --- Brand colours (exact values — do not approximate) --- */
+  --color-porty-red: #6b1220; /* primary Portcullis red */
+  --color-porty-dark: #5c0e17; /* darker panel red — specials/footer blocks */
+  --color-porty-cream: #f7f3ea; /* cream background */
+  --color-porty-gold: #e8c55f; /* gold crest accent — small highlights/dividers */
+
+  /* --- Type --- */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Karla', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Also expose the exact custom-property names requested, for any hand-written
+   CSS that wants them directly. These mirror the theme tokens above. */
+:root {
+  --porty-red: var(--color-porty-red);
+  --porty-dark: var(--color-porty-dark);
+  --porty-cream: var(--color-porty-cream);
+  --porty-gold: var(--color-porty-gold);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* offset anchor targets so they aren't hidden behind the sticky header */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-porty-cream);
+    color: var(--color-porty-dark);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  /* Visible focus ring for keyboard users everywhere */
+  :focus-visible {
+    outline: 3px solid var(--color-porty-gold);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Gold hairline divider used between sections */
+  .rule-gold {
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-porty-gold),
+      transparent
+    );
+  }
+
+  /* Small caps eyebrow label above section headings */
+  .eyebrow {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-porty-red);
+  }
+}
+
+/* --- Scroll-reveal animation (progressive enhancement) ---
+   Elements tagged [data-reveal] start hidden; JS adds .is-visible when they
+   scroll into view. If JS is off, a <noscript> rule (in BaseLayout) shows them. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Respect users who prefer reduced motion: no transforms, no smooth scroll */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

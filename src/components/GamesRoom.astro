@@ -1,0 +1,56 @@
+---
+/* Games Room — pool tables, professional dart boards, board game nights. */
+import { images } from '../config/site';
+
+const features = [
+  { title: 'Pool Tables', copy: 'Rack ’em up — perfect for a relaxed evening with friends.' },
+  { title: 'Professional Dart Boards', copy: 'Proper boards for a proper game of arrows.' },
+  { title: 'Board Game Nights', copy: 'Bring the family or the crew for a night of friendly competition.' },
+];
+---
+
+<section id="games" class="mx-auto max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 sm:py-24">
+  <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+    <div data-reveal>
+      <p class="eyebrow">Stay &amp; Play</p>
+      <h2 class="mt-3 font-display text-3xl font-semibold text-porty-red sm:text-4xl">
+        The Games Room
+      </h2>
+      <p class="mt-5 text-lg leading-relaxed text-porty-dark/85">
+        Settle in and make a night of it. Our games room is where the fun keeps
+        going long after the plates are cleared.
+      </p>
+
+      <dl class="mt-8 space-y-5">
+        {
+          features.map((f) => (
+            <div class="flex gap-4">
+              <span class="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-porty-red/10 text-porty-red">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" />
+                  <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+                </svg>
+              </span>
+              <div>
+                <dt class="font-display text-xl font-semibold text-porty-red">{f.title}</dt>
+                <dd class="mt-1 text-porty-dark/80">{f.copy}</dd>
+              </div>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div data-reveal class="overflow-hidden rounded-3xl shadow-xl shadow-porty-red/10 ring-1 ring-porty-red/10">
+      <img
+        src={images.games}
+        alt="The games room at The Portcullis with pool tables and dart boards"
+        class="h-full w-full object-cover"
+        loading="lazy"
+        decoding="async"
+        width="1200"
+        height="900"
+      />
+    </div>
+  </div>
+</section>

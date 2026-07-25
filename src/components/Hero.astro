@@ -1,0 +1,59 @@
+---
+/* Full-bleed hero. The photo loads eagerly (it's the LCP element). A burgundy
+   gradient overlay (--porty-dark ~55% -> transparent) keeps the white text
+   legible across the whole image on every screen size. */
+import { site, images } from '../config/site';
+import BookButton from './BookButton.astro';
+---
+
+<section id="top" class="relative flex min-h-[92svh] items-end overflow-hidden">
+  <!-- Background photo -->
+  <img
+    src={images.hero}
+    alt="The Portcullis pub and restaurant in Arbroath, with outdoor seating"
+    class="absolute inset-0 h-full w-full object-cover"
+    fetchpriority="high"
+    loading="eager"
+    decoding="async"
+    width="1920"
+    height="1280"
+  />
+
+  <!-- Burgundy-tinted overlay: strongest at the bottom where the text sits,
+       fading up, plus a subtle darkening across the whole image. -->
+  <div
+    class="absolute inset-0"
+    style="background:
+      linear-gradient(to top, rgba(92,14,23,0.88) 0%, rgba(92,14,23,0.55) 42%, rgba(92,14,23,0.18) 75%, rgba(92,14,23,0.10) 100%);"
+    aria-hidden="true"
+  >
+  </div>
+
+  <!-- Content -->
+  <div class="relative mx-auto w-full max-w-7xl px-4 pb-14 pt-28 sm:px-6 sm:pb-20 lg:pb-24">
+    <p class="mb-3 font-body text-sm font-semibold uppercase tracking-[0.28em] text-porty-gold">
+      Arbroath · Est. Your Local
+    </p>
+    <h1 class="max-w-3xl font-display text-5xl font-semibold leading-[1.02] text-porty-cream drop-shadow-sm sm:text-6xl lg:text-7xl">
+      The Portcullis
+    </h1>
+    <p class="mt-4 max-w-xl font-display text-xl italic text-porty-cream/95 sm:text-2xl">
+      {site.tagline}
+    </p>
+
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <BookButton size="lg" variant="gold" />
+      <a
+        href={site.phoneHref}
+        class="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border-2 border-porty-cream/70 px-7 py-4 text-lg font-semibold text-porty-cream transition-all duration-200 hover:-translate-y-0.5 hover:bg-porty-cream hover:text-porty-red"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
+          <path
+            d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .5 1 1V20c0 .6-.5 1-1 1A17 17 0 0 1 3 4c0-.6.5-1 1-1h3.5c.6 0 1 .5 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1l-2.3 2.3z"
+          />
+        </svg>
+        Call {site.phone}
+      </a>
+    </div>
+  </div>
+</section>
