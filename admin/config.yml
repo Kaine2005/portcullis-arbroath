@@ -1,0 +1,103 @@
+# =====================================================================
+# Decap CMS configuration — the /admin editor.
+# Every field below maps to a field in src/content.config.ts. If you add a
+# field here, add it there too (and vice-versa).
+#
+# BACKEND: git-gateway = the free Netlify login. This is the recommended setup.
+# When someone saves in /admin, Decap commits the change to this repo on the
+# `main` branch, which triggers a fresh deploy. No code, no terminal.
+#
+# ON GITHUB PAGES INSTEAD? Git Gateway is a Netlify feature, so swap the backend
+# block for the GitHub one (commented out below) and set up an OAuth provider.
+# See the README "GitHub Pages" section — this is why Netlify is recommended.
+# =====================================================================
+
+backend:
+  name: git-gateway
+  branch: main # the branch the site deploys from
+
+# --- GitHub Pages alternative (uncomment, and remove the git-gateway block) ---
+# backend:
+#   name: github
+#   repo: your-github-username/portcullis-arbroath
+#   branch: main
+#   base_url: https://your-oauth-provider.example.com  # an OAuth relay you host
+
+# Uploaded images (e.g. event photos) are saved here in the repo...
+media_folder: "public/images/uploads"
+# ...and referenced on the site from this URL path.
+public_folder: "/images/uploads"
+
+# Friendly site name shown in the editor UI.
+site_url: https://portcullis-arbroath.co.uk
+display_url: https://portcullis-arbroath.co.uk
+logo_url: /images/logo.png
+
+collections:
+  # ------------------------------------------------------------------
+  # WEEKLY SPECIALS
+  # ------------------------------------------------------------------
+  - name: "specials"
+    label: "Weekly Specials"
+    label_singular: "Special"
+    description: "Regular deals shown in the 'Weekly Specials' section."
+    folder: "src/content/specials"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: ["order", "title"]
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "emoji", label: "Emoji (optional)", widget: "string", required: false, hint: "A single emoji, e.g. 🍲" }
+      - { name: "days", label: "Days", widget: "string", required: false, hint: "e.g. Mon–Fri or Every Wednesday" }
+      - { name: "times", label: "Times", widget: "string", required: false, hint: "e.g. 12–2pm" }
+      - { name: "description", label: "Description", widget: "text" }
+      - { name: "order", label: "Display order", widget: "number", default: 1, value_type: "int", hint: "Lower numbers appear first" }
+
+  # ------------------------------------------------------------------
+  # UPCOMING EVENTS
+  # ------------------------------------------------------------------
+  - name: "events"
+    label: "Upcoming Events"
+    label_singular: "Event"
+    description: "Events shown in the 'What's On' section (bingo, band nights…)."
+    folder: "src/content/events"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: ["order", "title"]
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "recurring", label: "Recurring (optional)", widget: "string", required: false, hint: "e.g. Every Wednesday & Sunday. Leave blank for a one-off event and use the date below." }
+      - { name: "date", label: "Date (optional)", widget: "datetime", required: false, date_format: "DD/MM/YYYY", time_format: false, picker_utc: false, hint: "Only for one-off events." }
+      - { name: "times", label: "Times", widget: "string", required: false, hint: "e.g. Doors 6:30pm · Eyes down 7:30pm" }
+      - { name: "description", label: "Description", widget: "text" }
+      - { name: "image", label: "Image (optional)", widget: "image", required: false, media_library: { config: { max_file_size: 5000000 } } }
+      - { name: "order", label: "Display order", widget: "number", default: 1, value_type: "int" }
+
+  # ------------------------------------------------------------------
+  # MENU ITEMS
+  # ------------------------------------------------------------------
+  - name: "menu"
+    label: "Menu Items"
+    label_singular: "Menu Item"
+    description: "Dishes shown on the Main / OAP / Kids / Specials menu pages."
+    folder: "src/content/menu"
+    create: true
+    slug: "{{menu}}-{{slug}}"
+    summary: "{{name}} — {{price}}  ({{menu}})"
+    sortable_fields: ["menu", "category", "order", "name"]
+    fields:
+      - { name: "name", label: "Dish name", widget: "string" }
+      - { name: "description", label: "Description", widget: "text", required: false }
+      - { name: "price", label: "Price", widget: "string", hint: "Type it exactly, e.g. £14.95 or Market price" }
+      - name: "menu"
+        label: "Which menu?"
+        widget: "select"
+        options:
+          - { label: "Main Menu", value: "main" }
+          - { label: "OAP Menu", value: "oap" }
+          - { label: "Kids Menu", value: "kids" }
+          - { label: "Specials", value: "specials" }
+      - { name: "category", label: "Category", widget: "string", hint: "e.g. Starters, Mains, Desserts" }
+      - { name: "order", label: "Display order", widget: "number", default: 1, value_type: "int" }
