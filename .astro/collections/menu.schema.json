@@ -1,0 +1,46 @@
+{
+  "$ref": "#/definitions/menu",
+  "definitions": {
+    "menu": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "menu": {
+          "type": "string",
+          "enum": [
+            "main",
+            "oap",
+            "kids",
+            "specials"
+          ]
+        },
+        "order": {
+          "type": "number",
+          "default": 0
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "price",
+        "category",
+        "menu"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
