@@ -63,8 +63,10 @@ const nav = [
           />
         </svg>
       </a>
+      <!-- Book stays in the header from tablet up; on phones it lives inside
+           the menu panel so the pub name has room and there's only one
+           WhatsApp CTA on screen at a time. -->
       <BookButton size="sm" label="Book" class="hidden sm:inline-flex" />
-      <BookButton size="sm" label="Book" class="sm:hidden !px-4" />
 
       <!-- Mobile menu toggle -->
       <button
@@ -103,6 +105,9 @@ const nav = [
           </li>
         ))
       }
+      <li class="pt-3 pb-1">
+        <BookButton size="md" class="w-full" />
+      </li>
     </ul>
   </nav>
 </header>
