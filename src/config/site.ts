@@ -59,15 +59,18 @@ export const socials = [
 ] as const;
 
 /* Image paths. Drop the real files into `public/images/` using EXACTLY these
-   filenames (spaces and all) and they will appear automatically.
-   Paths use %20 where the filename contains a space. */
+   filenames and they will appear automatically. Use plain lowercase names
+   with hyphens (no spaces). BASE_URL keeps paths correct when the site is
+   served from a sub-folder (e.g. GitHub Pages: /portcullis-arbroath/). */
+const base = import.meta.env.BASE_URL.replace(/\/$/, ''); // "/portcullis-arbroath" in prod, "" in dev
+
 export const images = {
-  hero: '/images/outside2.jpeg', // full-bleed hero
-  about: '/images/resturaunt.jpg', // welcome / about
-  functions: '/images/function%20room.jpg', // functions section
-  games: '/images/games%20room.jpg', // games room section
-  contact: '/images/outside.jpg', // find us / contact
-  logo: '/images/logo.png', // crest logo (transparent PNG)
+  hero: `${base}/images/outside2.jpeg`, // full-bleed hero
+  about: `${base}/images/resturaunt.jpg`, // welcome / about
+  functions: `${base}/images/function-room.jpg`, // functions section
+  games: `${base}/images/games-room.jpg`, // games room section
+  contact: `${base}/images/outside.jpg`, // find us / contact
+  logo: `${base}/images/logo.png`, // crest logo (transparent PNG)
 } as const;
 
 // The four printed menus, used to build the menu cards + separate pages.

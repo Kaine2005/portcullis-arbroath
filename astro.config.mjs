@@ -7,8 +7,8 @@ import sitemap from '@astrojs/sitemap';
 // If you deploy to a GitHub Pages *project* URL (e.g. user.github.io/portcullis),
 // also uncomment `base` below — see README "GitHub Pages" section.
 export default defineConfig({
-  site: 'https://portcullis-arbroath.co.uk',
-  // base: '/portcullis-arbroath', // <-- only for GitHub Pages project sites
+  site: 'https://kaine2005.github.io',
+  base: '/portcullis-arbroath',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
