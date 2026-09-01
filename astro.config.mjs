@@ -9,6 +9,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://kaine2005.github.io',
   base: '/portcullis-arbroath',
+  // Prefetch a page's HTML when a link is hovered/tapped, so navigating
+  // between pages feels instant.
+  prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],

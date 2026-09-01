@@ -17,6 +17,9 @@ const {
   ogImage = images.hero,
 } = Astro.props;
 
+const fontsHref =
+  'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Karla:wght@400..700&display=swap';
+
 const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · Arbroath`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 const ogImageUrl = new URL(ogImage, Astro.site ?? site.url).href;
@@ -72,13 +75,14 @@ const restaurantSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <!-- Fonts: Fraunces (warm display serif) + Karla (clean body sans) -->
+    <!-- Fonts: Fraunces (warm display serif) + Karla (clean body sans).
+         Loaded async (print-media swap) so they never block first paint;
+         display=swap shows fallback text instantly, then upgrades. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600;9..144,700&family=Karla:wght@300..700&display=swap"
-    />
+    <link rel="preload" as="style" href={fontsHref} />
+    <link rel="stylesheet" href={fontsHref} media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href={fontsHref} /></noscript>
 
     <!-- Structured data -->
     <script type="application/ld+json" set:html={JSON.stringify(restaurantSchema)} />
