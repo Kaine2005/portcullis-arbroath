@@ -75,29 +75,5 @@ collections:
       - { name: "image", label: "Image (optional)", widget: "image", required: false, media_library: { config: { max_file_size: 5000000 } } }
       - { name: "order", label: "Display order", widget: "number", default: 1, value_type: "int" }
 
-  # ------------------------------------------------------------------
-  # MENU ITEMS
-  # ------------------------------------------------------------------
-  - name: "menu"
-    label: "Menu Items"
-    label_singular: "Menu Item"
-    description: "Dishes shown on the Main / OAP / Kids / Specials menu pages."
-    folder: "src/content/menu"
-    create: true
-    slug: "{{menu}}-{{slug}}"
-    summary: "{{name}} — {{price}}  ({{menu}})"
-    sortable_fields: ["menu", "category", "order", "name"]
-    fields:
-      - { name: "name", label: "Dish name", widget: "string" }
-      - { name: "description", label: "Description", widget: "text", required: false }
-      - { name: "price", label: "Price", widget: "string", hint: "Type it exactly, e.g. £14.95 or Market price" }
-      - name: "menu"
-        label: "Which menu?"
-        widget: "select"
-        options:
-          - { label: "Main Menu", value: "main" }
-          - { label: "OAP Menu", value: "oap" }
-          - { label: "Kids Menu", value: "kids" }
-          - { label: "Specials", value: "specials" }
-      - { name: "category", label: "Category", widget: "string", hint: "e.g. Starters, Mains, Desserts" }
-      - { name: "order", label: "Display order", widget: "number", default: 1, value_type: "int" }
+  # NOTE: Menus are managed in code (src/config/menuData.ts), not the CMS,
+  # because the full menu is large and changes rarely.
