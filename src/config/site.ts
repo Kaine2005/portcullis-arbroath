@@ -63,7 +63,6 @@ export const socials = [
     name: 'Instagram',
     url: 'https://www.instagram.com/theportyarbroath?igsh=ZTU4ZDZsOHdjd2t4',
   },
-  { name: 'Snapchat', url: 'https://snapchat.com/t/IKqQWIeN' },
   {
     name: 'TikTok',
     url: 'https://www.tiktok.com/@portcullis.arbroa?_t=ZN-8wcwpOqwcTq&_r=1',
