@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import Functions from '../components/Functions.astro';
+---
+
+<BaseLayout title="Functions & Celebrations" description="Book the function suite at The Portcullis, Arbroath, for birthdays, weddings, wakes, fundraisers and celebrations of every size.">
+  <Header />
+  <main id="main">
+    <PageHero
+      title="Functions & Celebrations"
+      eyebrow="Celebrate With Us"
+      intro="A fully licensed function suite with catering to match, the perfect setting for occasions big and small."
+    />
+    <Functions />
+  </main>
+  <Footer />
+</BaseLayout>

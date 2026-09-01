@@ -1,0 +1,20 @@
+---
+/* Consistent page header used at the top of every interior page: a burgundy
+   band with a gold eyebrow, the page title and an optional short intro. Gives
+   the multi-page site a cohesive, editorial feel. */
+import PortcullisDivider from './PortcullisDivider.astro';
+
+interface Props {
+  title: string;
+  eyebrow?: string;
+  intro?: string;
+}
+const { title, eyebrow = 'The Portcullis · Arbroath', intro } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-porty-red px-4 pb-14 pt-28 text-center text-porty-cream sm:px-6 sm:pb-16 sm:pt-32">
+  <p class="font-body text-xs font-bold uppercase tracking-[0.24em] text-porty-gold">{eyebrow}</p>
+  <h1 class="mx-auto mt-3 max-w-3xl font-display text-4xl font-semibold sm:text-5xl">{title}</h1>
+  {intro && <p class="mx-auto mt-4 max-w-xl text-lg text-porty-cream/85">{intro}</p>}
+  <PortcullisDivider class="mt-6" />
+</section>

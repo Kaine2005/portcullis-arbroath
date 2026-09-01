@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import GamesRoom from '../components/GamesRoom.astro';
+import MeetTheTeam from '../components/MeetTheTeam.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout title="The Games Room" description="Pool tables, professional dart boards and board game nights at The Portcullis, Arbroath, plus our pub pool team.">
+  <Header />
+  <main id="main">
+    <PageHero
+      title="The Games Room"
+      eyebrow="Stay & Play"
+      intro="Pool, darts and game nights, where the fun keeps going long after the plates are cleared."
+    />
+    <GamesRoom />
+    <div class="bg-porty-cream/60"><MeetTheTeam /></div>
+    <CtaBand title="Make a night of it" text="Book a table, then stay on for a few frames. Call or email to reserve." />
+  </main>
+  <Footer />
+</BaseLayout>

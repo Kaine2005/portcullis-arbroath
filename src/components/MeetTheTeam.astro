@@ -1,0 +1,50 @@
+---
+/* Meet the Team — the Portcullis pool team. Placeholder team photo for now
+   (no photos taken yet). Drop a real photo in and swap <Placeholder> for an
+   <img> when it's ready. */
+import Placeholder from './Placeholder.astro';
+import PortcullisDivider from './PortcullisDivider.astro';
+---
+
+<section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
+  <div class="mx-auto max-w-2xl text-center" data-reveal>
+    <p class="eyebrow">On The Baize</p>
+    <h2 class="mt-3 font-display text-3xl font-semibold text-porty-red sm:text-4xl">Meet the Pool Team</h2>
+    <p class="mt-4 text-lg text-porty-dark/80">
+      The Portcullis pool team fly the flag for the pub on the local circuit,
+      and there's always a warm welcome (and a bit of friendly needle) at the
+      table. Come down, cheer them on, and see if you can take a frame.
+    </p>
+    <PortcullisDivider class="mt-6" />
+  </div>
+
+  <div class="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+    <div data-reveal>
+      <Placeholder label="Team photo coming soon" ratio="4/3" class="shadow-xl shadow-porty-red/10" />
+    </div>
+    <div data-reveal>
+      <h3 class="font-display text-2xl font-semibold text-porty-red">Fancy joining us?</h3>
+      <p class="mt-4 text-lg leading-relaxed text-porty-dark/85">
+        Whether you're a seasoned potter or just fancy learning the ropes, new
+        faces are always welcome. We play regular fixtures and practice nights
+        in the games room, all abilities, all ages (18+), all good craic.
+      </p>
+      <ul class="mt-6 space-y-3">
+        {
+          ['Regular league fixtures', 'Practice & social nights', 'All abilities welcome'].map((f) => (
+            <li class="flex items-center gap-3 text-porty-dark/90">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5 shrink-0 text-porty-gold" aria-hidden="true">
+                <path d="M5 13l4 4L19 7" />
+              </svg>
+              {f}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 rounded-2xl bg-porty-cream p-5 text-porty-dark/85 ring-1 ring-porty-red/10">
+        Interested? Have a word with the team at the bar, or ask for John, we'll
+        get you on the list.
+      </p>
+    </div>
+  </div>
+</section>

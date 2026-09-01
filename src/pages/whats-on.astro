@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import Events from '../components/Events.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout title="What's On" description="What's on at The Portcullis, Arbroath, bingo nights, band nights and events. Here's what's coming up.">
+  <Header />
+  <main id="main">
+    <PageHero
+      title="What's On"
+      eyebrow="Events & Nights"
+      intro="There's always something happening at The Porty. Here's what's coming up."
+    />
+    <Events bare />
+    <CtaBand title="Want to join us?" text="Call or email to reserve your spot for bingo, band nights and more." />
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+/* Community & sponsorship — the local clubs and causes The Portcullis backs.
+   Placeholder crest tiles for now; swap in each club's badge when supplied. */
+import { sponsors } from '../config/site';
+import Placeholder from './Placeholder.astro';
+---
+
+<section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
+  <div class="mx-auto max-w-2xl text-center" data-reveal>
+    <p class="eyebrow">Proud to Support</p>
+    <h2 class="mt-3 font-display text-3xl font-semibold text-porty-red sm:text-4xl">
+      Backing our local clubs &amp; causes
+    </h2>
+    <p class="mt-4 text-lg text-porty-dark/80">
+      The Portcullis is Arbroath through and through. We're proud to sponsor and
+      support teams and organisations doing brilliant things across our town,
+      from grassroots football to community fundraising.
+    </p>
+  </div>
+
+  <div class="mt-12 grid gap-6 sm:grid-cols-2">
+    {
+      sponsors.map((s) => (
+        <article
+          data-reveal
+          class="flex items-center gap-5 rounded-3xl border border-porty-red/10 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-porty-red/10 sm:p-6"
+        >
+          <Placeholder label="Badge" ratio="1/1" class="h-20 w-20 shrink-0 !rounded-xl" />
+          <div>
+            <p class="font-body text-xs font-bold uppercase tracking-[0.16em] text-porty-gold">{s.tag}</p>
+            <h3 class="mt-1 font-display text-xl font-semibold text-porty-red">{s.name}</h3>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="mx-auto mt-14 max-w-2xl rounded-3xl bg-porty-cream p-8 text-center ring-1 ring-porty-red/10" data-reveal>
+    <p class="font-display text-xl text-porty-red">Run a local club or fundraiser?</p>
+    <p class="mt-3 text-porty-dark/80">
+      If you're organising something for the good of Arbroath, we'd love to hear
+      about it. Pop in for a chat or give us a call, we're always keen to help
+      where we can.
+    </p>
+  </div>
+</section>

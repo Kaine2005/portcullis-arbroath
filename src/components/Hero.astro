@@ -3,7 +3,7 @@
    gradient overlay (--porty-dark ~55% -> transparent) keeps the white text
    legible across the whole image on every screen size. */
 import { site, images } from '../config/site';
-import BookButton from './BookButton.astro';
+import BookCta from './BookCta.astro';
 ---
 
 <section id="top" class="relative flex min-h-[92svh] items-end overflow-hidden">
@@ -44,19 +44,8 @@ import BookButton from './BookButton.astro';
       </p>
     </div>
 
-    <div class="hero-rise mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style="animation-delay:0.45s">
-      <BookButton size="lg" variant="gold" />
-      <a
-        href={site.phoneHref}
-        class="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border-2 border-porty-cream/70 px-7 py-4 text-lg font-semibold text-porty-cream transition-all duration-200 hover:-translate-y-0.5 hover:bg-porty-cream hover:text-porty-red"
-      >
-        <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
-          <path
-            d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .5 1 1V20c0 .6-.5 1-1 1A17 17 0 0 1 3 4c0-.6.5-1 1-1h3.5c.6 0 1 .5 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1l-2.3 2.3z"
-          />
-        </svg>
-        Call {site.phone}
-      </a>
+    <div class="hero-rise mt-8" style="animation-delay:0.45s">
+      <BookCta size="lg" variant="gold" onDark callLabel={`Call to book · ${site.phone}`} />
     </div>
   </div>
 </section>

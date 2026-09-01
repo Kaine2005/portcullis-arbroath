@@ -1,18 +1,9 @@
 ---
-/* Find Us / Contact, address, tap-to-call, email, opening hours, embedded map,
-   flat-burgundy socials, and a lightweight booking/contact form.
-
-   FORM HANDLING:
-   - Primary: Netlify Forms (the data-netlify attributes below). On Netlify this
-     just works, submissions appear in your dashboard and can email
-     contact@portcullis-arbroath.co.uk (set up in Netlify > Forms > Notifications).
-   - Fallback: Formspree. If you are NOT on Netlify, delete the two data-netlify
-     lines + the hidden inputs, and set:
-       action="https://formspree.io/f/XXXXXXXX" method="POST"
-     (create a free form at formspree.io pointed at contact@portcullis-arbroath.co.uk)
-*/
+/* Find Us / Contact: address, tap-to-call, email, the bar & restaurant opening
+   hours, an embedded map, socials, and a clear "how to book" panel. Bookings
+   are taken by phone or email only. */
 import { site } from '../config/site';
-import BookButton from './BookButton.astro';
+import BookCta from './BookCta.astro';
 import SocialLinks from './SocialLinks.astro';
 
 const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
@@ -21,22 +12,17 @@ const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
 const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   `The Portcullis, ${site.address.street}, ${site.address.town} ${site.address.postcode}`
 )}`;
+
+const hourGroups = [
+  { label: 'Bar', rows: site.hours.bar },
+  { label: 'Restaurant', rows: site.hours.restaurant },
+  { label: 'Breakfast (in the restaurant)', rows: site.hours.breakfast },
+];
 ---
 
-<section id="contact" class="scroll-mt-20 bg-porty-cream px-4 py-16 sm:px-6 sm:py-24">
+<section class="bg-porty-cream px-4 py-16 sm:px-6 sm:py-24">
   <div class="mx-auto max-w-7xl">
-    <div class="mx-auto max-w-2xl text-center" data-reveal>
-      <p class="eyebrow">Find Us</p>
-      <h2 class="mt-3 font-display text-3xl font-semibold text-porty-red sm:text-4xl">
-        Come On In
-      </h2>
-      <p class="mt-4 text-lg text-porty-dark/80">
-        We're in the heart of Arbroath. Pop in, give us a call, or book your
-        table below.
-      </p>
-    </div>
-
-    <div class="mt-12 grid gap-8 lg:grid-cols-2">
+    <div class="grid gap-8 lg:grid-cols-2">
       <!-- Left: details, hours, map, socials -->
       <div data-reveal class="space-y-8">
         <div class="rounded-3xl border border-porty-red/10 bg-white p-6 shadow-sm sm:p-8">
@@ -69,19 +55,25 @@ const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
           <div class="my-6 rule-gold"></div>
 
           <h3 class="font-display text-lg font-semibold text-porty-red">Opening Hours</h3>
-          <p class="mt-1 text-xs font-medium uppercase tracking-wide text-porty-dark/50">
-            Placeholder, please confirm your real hours
-          </p>
-          <dl class="mt-3 divide-y divide-porty-red/10">
+          <div class="mt-4 space-y-6">
             {
-              site.hours.map((h) => (
-                <div class="flex justify-between py-2 text-porty-dark/85">
-                  <dt>{h.days}</dt>
-                  <dd class="font-medium">{h.time}</dd>
+              hourGroups.map((g) => (
+                <div>
+                  <p class="text-xs font-bold uppercase tracking-[0.16em] text-porty-gold [text-shadow:0_0_1px_rgba(107,18,32,0.25)]">
+                    {g.label}
+                  </p>
+                  <dl class="mt-2 divide-y divide-porty-red/10">
+                    {g.rows.map((h) => (
+                      <div class="flex justify-between gap-4 py-2 text-porty-dark/85">
+                        <dt>{h.days}</dt>
+                        <dd class="text-right font-medium">{h.time}</dd>
+                      </div>
+                    ))}
+                  </dl>
                 </div>
               ))
             }
-          </dl>
+          </div>
 
           <div class="my-6 rule-gold"></div>
 
@@ -100,82 +92,26 @@ const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
         </div>
       </div>
 
-      <!-- Right: booking / contact form -->
-      <div data-reveal class="rounded-3xl bg-porty-dark p-6 text-porty-cream shadow-xl sm:p-8">
-        <h3 class="font-display text-2xl font-semibold">Book a Table</h3>
-        <p class="mt-2 text-porty-cream/80">
-          The quickest way to book is WhatsApp, or send us the details below and
-          we'll be in touch.
-        </p>
-        <BookButton class="mt-4" variant="gold" />
+      <!-- Right: how to book -->
+      <div data-reveal class="lg:sticky lg:top-24 lg:self-start">
+        <div class="rounded-3xl bg-porty-dark p-8 text-porty-cream shadow-xl sm:p-10">
+          <p class="font-body text-xs font-bold uppercase tracking-[0.22em] text-porty-gold">Reservations</p>
+          <h3 class="mt-3 font-display text-3xl font-semibold">Book a Table</h3>
+          <p class="mt-3 text-porty-cream/85">
+            The best way to book is to give us a call, our team will sort you out
+            in a minute. Prefer to write? Drop us an email with your date, time and
+            number of people and we'll confirm as soon as we can.
+          </p>
+          <BookCta class="mt-6" variant="gold" stack callLabel={`Call · ${site.phone}`} emailLabel={site.email} />
 
-        <div class="my-6 flex items-center gap-4 text-porty-cream/50">
-          <span class="h-px flex-1 bg-porty-cream/20"></span>
-          <span class="text-xs uppercase tracking-widest">or send a message</span>
-          <span class="h-px flex-1 bg-porty-cream/20"></span>
+          <div class="my-8 h-px bg-porty-cream/15"></div>
+
+          <p class="text-sm text-porty-cream/75">
+            <span class="font-semibold text-porty-cream">Functions &amp; celebrations:</span>
+            planning something bigger? Call {site.phone} or email us and ask about the
+            function suite, we'll help you plan every detail.
+          </p>
         </div>
-
-        <form
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          class="space-y-4"
-        >
-          <!-- Netlify needs these two hidden inputs; harmless elsewhere -->
-          <input type="hidden" name="form-name" value="contact" />
-          <p class="hidden">
-            <label>Don't fill this out: <input name="bot-field" /></label>
-          </p>
-
-          <div>
-            <label for="c-name" class="mb-1 block text-sm font-medium text-porty-cream/90">Name</label>
-            <input id="c-name" name="name" type="text" required autocomplete="name"
-              class="w-full rounded-xl border border-porty-cream/20 bg-porty-cream/10 px-4 py-3 text-porty-cream placeholder-porty-cream/40 focus:border-porty-gold focus:bg-porty-cream/15 focus:outline-none" />
-          </div>
-
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label for="c-phone" class="mb-1 block text-sm font-medium text-porty-cream/90">Phone</label>
-              <input id="c-phone" name="phone" type="tel" autocomplete="tel"
-                class="w-full rounded-xl border border-porty-cream/20 bg-porty-cream/10 px-4 py-3 text-porty-cream placeholder-porty-cream/40 focus:border-porty-gold focus:bg-porty-cream/15 focus:outline-none" />
-            </div>
-            <div>
-              <label for="c-email" class="mb-1 block text-sm font-medium text-porty-cream/90">Email</label>
-              <input id="c-email" name="email" type="email" autocomplete="email"
-                class="w-full rounded-xl border border-porty-cream/20 bg-porty-cream/10 px-4 py-3 text-porty-cream placeholder-porty-cream/40 focus:border-porty-gold focus:bg-porty-cream/15 focus:outline-none" />
-            </div>
-          </div>
-
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label for="c-datetime" class="mb-1 block text-sm font-medium text-porty-cream/90">Preferred date &amp; time</label>
-              <input id="c-datetime" name="datetime" type="text" placeholder="e.g. Sat 12th, 7pm"
-                class="w-full rounded-xl border border-porty-cream/20 bg-porty-cream/10 px-4 py-3 text-porty-cream placeholder-porty-cream/40 focus:border-porty-gold focus:bg-porty-cream/15 focus:outline-none" />
-            </div>
-            <div>
-              <label for="c-people" class="mb-1 block text-sm font-medium text-porty-cream/90">Number of people</label>
-              <input id="c-people" name="people" type="number" min="1" inputmode="numeric" placeholder="e.g. 4"
-                class="w-full rounded-xl border border-porty-cream/20 bg-porty-cream/10 px-4 py-3 text-porty-cream placeholder-porty-cream/40 focus:border-porty-gold focus:bg-porty-cream/15 focus:outline-none" />
-            </div>
-          </div>
-
-          <div>
-            <label for="c-message" class="mb-1 block text-sm font-medium text-porty-cream/90">Message</label>
-            <textarea id="c-message" name="message" rows="3" placeholder="Any special requests?"
-              class="w-full rounded-xl border border-porty-cream/20 bg-porty-cream/10 px-4 py-3 text-porty-cream placeholder-porty-cream/40 focus:border-porty-gold focus:bg-porty-cream/15 focus:outline-none"></textarea>
-          </div>
-
-          <button type="submit"
-            class="inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-porty-gold px-6 py-3 font-semibold text-porty-dark transition-all duration-200 hover:-translate-y-0.5 hover:brightness-105 cursor-pointer">
-            Send booking request
-          </button>
-          <p class="text-center text-xs text-porty-cream/60">
-            For functions &amp; events, please use our
-            <a href={site.functionBookingUrl} target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-porty-gold">function booking form</a>
-            or call {site.phone}.
-          </p>
-        </form>
       </div>
     </div>
   </div>

@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import Gallery from '../components/Gallery.astro';
+---
+
+<BaseLayout title="Down Porty's Lens" description="Photos from The Portcullis, Arbroath, parties, band nights, bingo and big nights out. A peek at life at The Porty.">
+  <Header />
+  <main id="main">
+    <PageHero
+      title="Down Porty's Lens"
+      eyebrow="The Gallery"
+      intro="Parties, band nights and big nights out, a peek at life at The Porty."
+    />
+    <Gallery />
+  </main>
+  <Footer />
+</BaseLayout>

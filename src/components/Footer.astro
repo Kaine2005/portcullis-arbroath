@@ -1,16 +1,9 @@
 ---
-import { site, images } from '../config/site';
+import { site, images, nav, withBase } from '../config/site';
 import SocialLinks from './SocialLinks.astro';
 
 const year = new Date().getFullYear();
-const links = [
-  { label: 'About', href: '/#about' },
-  { label: 'Menus', href: '/#menus' },
-  { label: 'Specials', href: '/#specials' },
-  { label: "What's On", href: '/#events' },
-  { label: 'Functions', href: '/#functions' },
-  { label: 'Find Us', href: '/#contact' },
-];
+const links = nav;
 ---
 
 <footer class="bg-porty-dark text-porty-cream">
@@ -32,7 +25,7 @@ const links = [
         {
           links.map((l) => (
             <li>
-              <a href={l.href} class="text-porty-cream/85 transition-colors hover:text-porty-gold">{l.label}</a>
+              <a href={withBase(l.href)} class="text-porty-cream/85 transition-colors hover:text-porty-gold">{l.label}</a>
             </li>
           ))
         }
@@ -59,7 +52,7 @@ const links = [
         Site by
         <a href="https://copybykaine.com" target="_blank" rel="noopener" class="font-semibold text-porty-cream/90 underline underline-offset-2 transition-colors hover:text-porty-gold">CopyByKaine</a>
         <span class="mx-2 text-porty-cream/25">·</span>
-        <a href="/admin/" class="underline underline-offset-2 hover:text-porty-gold">Edit the site</a>
+        <a href={withBase('/admin/')} class="underline underline-offset-2 hover:text-porty-gold">Edit the site</a>
       </p>
     </div>
   </div>

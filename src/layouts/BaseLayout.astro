@@ -22,8 +22,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 const ogImageUrl = new URL(ogImage, Astro.site ?? site.url).href;
 
 // schema.org Restaurant structured data, helps Google show address, phone,
-// hours and stars. Hours are mapped from the config.
-const openingHours = site.hours.map((h) => `${h.days}: ${h.time}`);
+// hours and stars. Hours use the bar's schema-formatted opening times.
+const openingHours = site.schemaHours;
 const restaurantSchema = {
   '@context': 'https://schema.org',
   '@type': 'Restaurant',

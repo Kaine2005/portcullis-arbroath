@@ -1,0 +1,29 @@
+---
+/* Branded image placeholder for sections that don't have photos yet (team,
+   sponsors, gallery). A warm cream tile with the portcullis motif and a small
+   caption, so the layout looks intentional and finished rather than broken.
+   Swap for a real <img> when photos land. */
+interface Props {
+  label?: string;
+  ratio?: string; // any valid aspect-ratio, e.g. "4/3", "1/1", "16/9"
+  class?: string;
+}
+const { label = 'Photo coming soon', ratio = '4/3', class: extra = '' } = Astro.props;
+---
+
+<div
+  class:list={[
+    'flex flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl border border-porty-red/10 bg-gradient-to-br from-porty-cream to-porty-gold/15 text-center ring-1 ring-porty-red/5',
+    extra,
+  ]}
+  style={`aspect-ratio:${ratio}`}
+  aria-hidden="true"
+>
+  <svg viewBox="0 0 44 24" class="h-8 w-14 text-porty-red/30" fill="none" stroke="currentColor" stroke-width="1.6">
+    <line x1="2" y1="4" x2="42" y2="4" />
+    <line x1="2" y1="12" x2="42" y2="12" />
+    <path d="M8 4v14M16 4v14M24 4v14M32 4v14M40 4v14" />
+    <path d="M6 18h4l-2 3zM14 18h4l-2 3zM22 18h4l-2 3zM30 18h4l-2 3zM38 18h4l-2 3z" fill="currentColor" stroke="none" />
+  </svg>
+  <span class="px-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-porty-red/50">{label}</span>
+</div>

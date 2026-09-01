@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import Sponsors from '../components/Sponsors.astro';
+---
+
+<BaseLayout title="Community" description="The Portcullis is proud to support local Arbroath clubs and causes, from grassroots football to community fundraising.">
+  <Header />
+  <main id="main">
+    <PageHero
+      title="In the Community"
+      eyebrow="Proud to Support"
+      intro="The Porty is Arbroath through and through, and we love backing the clubs and causes that make our town tick."
+    />
+    <Sponsors />
+  </main>
+  <Footer />
+</BaseLayout>

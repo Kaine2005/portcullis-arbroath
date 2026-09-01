@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import Specials from '../components/Specials.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout title="Weekly Specials" description="The Portcullis weekly deals in Arbroath, pensioner lunches, kids eat free on Wednesdays, and midweek evening offers.">
+  <Header />
+  <main id="main">
+    <PageHero
+      title="Weekly Specials"
+      eyebrow="Great Value"
+      intro="Our regular deals, from pensioner lunches to midweek treats and kids eating free every Wednesday."
+    />
+    <Specials bare />
+    <CtaBand />
+  </main>
+  <Footer />
+</BaseLayout>

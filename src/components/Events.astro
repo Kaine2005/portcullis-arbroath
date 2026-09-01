@@ -3,15 +3,16 @@
    be recurring or a one-off date, and may have an optional image. */
 import { getCollection } from 'astro:content';
 import PortcullisDivider from './PortcullisDivider.astro';
+import { withBase } from '../config/site';
+
+interface Props {
+  bare?: boolean; // hide the centered header (page provides its own hero)
+}
+const { bare = false } = Astro.props;
 
 const events = (await getCollection('events')).sort(
   (a, b) => a.data.order - b.data.order
 );
-
-// Keep CMS-uploaded image paths (e.g. "/images/uploads/…") correct when the
-// site is served from a sub-folder like GitHub Pages' /portcullis-arbroath/.
-const withBase = (p: string) =>
-  `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${p.replace(/^\//, '')}`;
 
 const fmtDate = (d?: Date) =>
   d
@@ -24,18 +25,18 @@ const fmtDate = (d?: Date) =>
 ---
 
 <section id="events" class="mx-auto max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 sm:py-24">
-  <div class="mx-auto max-w-2xl text-center" data-reveal>
-    <p class="eyebrow">What's On</p>
-    <h2 class="mt-3 font-display text-3xl font-semibold text-porty-red sm:text-4xl">
-      Upcoming Events
-    </h2>
-    <p class="mt-4 text-lg text-porty-dark/80">
-      There's always something happening at The Portcullis. Here's what's coming up.
-    </p>
-    <PortcullisDivider class="mt-6" />
-  </div>
+  {!bare && (
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <p class="eyebrow">What's On</p>
+      <h2 class="mt-3 font-display text-3xl font-semibold text-porty-red sm:text-4xl">Upcoming Events</h2>
+      <p class="mt-4 text-lg text-porty-dark/80">
+        There's always something happening at The Portcullis. Here's what's coming up.
+      </p>
+      <PortcullisDivider class="mt-6" />
+    </div>
+  )}
 
-  <div class="mt-12 grid gap-6 md:grid-cols-2">
+  <div class:list={['grid gap-6 md:grid-cols-2', !bare && 'mt-12']}>
     {
       events.map((e) => (
         <article

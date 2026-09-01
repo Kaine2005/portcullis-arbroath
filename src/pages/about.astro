@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import About from '../components/About.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout title="About Us" description="The Portcullis is a warm, welcoming pub & restaurant in the heart of Arbroath, with great food, weekly deals and a proud local spirit.">
+  <Header />
+  <main id="main">
+    <PageHero
+      title="About Us"
+      eyebrow="Welcome to The Porty"
+      intro="A proper local in the heart of Arbroath, good food, good company and a warm welcome whatever the occasion."
+    />
+    <About />
+    <CtaBand />
+  </main>
+  <Footer />
+</BaseLayout>

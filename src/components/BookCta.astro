@@ -1,0 +1,66 @@
+---
+/* Booking call-to-action: Call + Email. The Portcullis takes bookings by phone
+   or email only (no WhatsApp / online form). Drop-in replacement for the old
+   BookButton wherever a "Book a Table" action is needed.
+
+   Props:
+   - variant: 'gold' | 'solid' | 'ghost'  — style of the primary (Call) button
+   - size:    'sm' | 'md' | 'lg'
+   - stack:   force buttons to stack vertically
+   - callLabel / emailLabel: override button text */
+import { site } from '../config/site';
+
+interface Props {
+  variant?: 'gold' | 'solid' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  stack?: boolean;
+  onDark?: boolean; // use cream outline for the secondary button (dark backgrounds)
+  callLabel?: string;
+  emailLabel?: string;
+  class?: string;
+}
+
+const {
+  variant = 'gold',
+  size = 'md',
+  stack = false,
+  onDark = false,
+  callLabel = `Call to book · ${site.phone}`,
+  emailLabel = 'Email us',
+  class: extra = '',
+} = Astro.props;
+
+const sizes = {
+  sm: 'px-4 py-2 text-sm min-h-[40px]',
+  md: 'px-6 py-3 text-base min-h-[48px]',
+  lg: 'px-7 py-4 text-lg min-h-[52px]',
+};
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition-all duration-200 cursor-pointer';
+const primary = {
+  gold: 'bg-porty-gold text-porty-dark shadow-lg shadow-porty-gold/30 hover:brightness-105 hover:-translate-y-0.5',
+  solid: 'bg-porty-red text-porty-cream shadow-lg shadow-porty-red/25 hover:bg-porty-dark hover:-translate-y-0.5',
+  ghost: 'border-2 border-porty-cream/80 text-porty-cream hover:bg-porty-cream hover:text-porty-red',
+};
+// The secondary (Email) button flips to suit dark vs light backgrounds.
+const secondary =
+  onDark || variant === 'ghost'
+    ? 'border-2 border-porty-cream/60 text-porty-cream hover:bg-porty-cream hover:text-porty-red'
+    : 'border-2 border-porty-red/70 text-porty-red hover:bg-porty-red hover:text-porty-cream';
+---
+
+<div class:list={['flex gap-3', stack ? 'flex-col' : 'flex-col sm:flex-row sm:items-center', extra]}>
+  <a href={site.phoneHref} class:list={[base, sizes[size], primary[variant]]}>
+    <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5 shrink-0" aria-hidden="true">
+      <path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .5 1 1V20c0 .6-.5 1-1 1A17 17 0 0 1 3 4c0-.6.5-1 1-1h3.5c.6 0 1 .5 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1l-2.3 2.3z" />
+    </svg>
+    {callLabel}
+  </a>
+  <a href={`mailto:${site.email}`} class:list={[base, sizes[size], secondary]}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 shrink-0" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3 7 9 6 9-6" />
+    </svg>
+    {emailLabel}
+  </a>
+</div>

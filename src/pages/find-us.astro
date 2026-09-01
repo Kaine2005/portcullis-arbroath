@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import Contact from '../components/Contact.astro';
+---
+
+<BaseLayout title="Find Us" description="Find The Portcullis at 6 Conon Terrace, Arbroath. Opening hours, directions and how to book a table by phone or email.">
+  <Header />
+  <main id="main">
+    <PageHero
+      title="Find Us"
+      eyebrow="Come On In"
+      intro="We're in the heart of Arbroath. Pop in, give us a call, or email to book your table."
+    />
+    <Contact />
+  </main>
+  <Footer />
+</BaseLayout>

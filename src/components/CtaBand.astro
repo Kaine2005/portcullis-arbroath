@@ -1,0 +1,24 @@
+---
+/* Reusable closing call-to-action band. Sits at the foot of interior pages to
+   nudge a booking. Bookings are by phone or email only. */
+import BookCta from './BookCta.astro';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+const {
+  title = 'Fancy a table?',
+  text = 'Give us a call or drop us an email and we’ll get you booked in.',
+} = Astro.props;
+---
+
+<section class="bg-porty-dark px-4 py-16 text-center text-porty-cream sm:px-6 sm:py-20">
+  <div class="mx-auto max-w-2xl">
+    <h2 class="font-display text-3xl font-semibold sm:text-4xl">{title}</h2>
+    <p class="mx-auto mt-4 max-w-lg text-lg text-porty-cream/85">{text}</p>
+    <div class="mt-8 flex justify-center">
+      <BookCta variant="gold" onDark />
+    </div>
+  </div>
+</section>

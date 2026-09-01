@@ -4,10 +4,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import BookButton from '../../components/BookButton.astro';
+import BookCta from '../../components/BookCta.astro';
 import PortcullisDivider from '../../components/PortcullisDivider.astro';
 import { getCollection } from 'astro:content';
-import { menus } from '../../config/site';
+import { menus, withBase } from '../../config/site';
 
 export async function getStaticPaths() {
   const all = await getCollection('menu');
@@ -84,12 +84,10 @@ for (const item of items) {
       <div class="mt-14 flex flex-col items-center gap-4 rounded-3xl bg-porty-cream p-8 text-center ring-1 ring-porty-red/10">
         <p class="font-display text-xl text-porty-red">Fancy a table?</p>
         <p class="max-w-md text-porty-dark/75">Menus may vary. Prices and dishes are subject to change, give us a shout to book.</p>
-        <div class="flex flex-wrap items-center justify-center gap-3">
-          <BookButton />
-          <a href="/#menus" class="inline-flex min-h-[48px] items-center rounded-full border-2 border-porty-red px-6 py-3 font-semibold text-porty-red transition-colors hover:bg-porty-red hover:text-porty-cream">
-            All menus
-          </a>
-        </div>
+        <BookCta variant="solid" />
+        <a href={withBase('/menus')} class="inline-flex min-h-[48px] items-center rounded-full border-2 border-porty-red px-6 py-3 font-semibold text-porty-red transition-colors hover:bg-porty-red hover:text-porty-cream">
+          All menus
+        </a>
       </div>
     </div>
   </main>
