@@ -102,13 +102,7 @@ export const images = {
   logo: withBase('/images/logo.png'), // crest logo (transparent PNG)
 } as const;
 
-// The four printed menus, used to build the menu cards + separate pages.
-export const menus = [
-  { slug: 'main', title: 'Main Menu', blurb: 'Our full menu of pub favourites and hearty plates.' },
-  { slug: 'oap', title: 'OAP Menu', blurb: 'Smaller plates and great value for our over-60s.' },
-  { slug: 'kids', title: 'Kids Menu', blurb: 'Little favourites the whole family will love.' },
-  { slug: 'specials', title: 'Specials', blurb: 'Our current deals and chef’s specials.' },
-] as const;
+// Menu content lives in src/config/menuData.ts (menuData + menuCards).
 
 // The clubs and causes The Portcullis proudly sponsors (Community page).
 export const sponsors = [
@@ -117,5 +111,3 @@ export const sponsors = [
   { name: 'Arbroath Youth Football Club', tag: 'Grassroots Football' },
   { name: 'Arbroath Rotary Club', tag: 'Community & Charity' },
 ] as const;
-
-export type MenuSlug = (typeof menus)[number]['slug'];

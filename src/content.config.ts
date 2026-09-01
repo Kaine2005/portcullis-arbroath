@@ -38,17 +38,7 @@ const events = defineCollection({
   }),
 });
 
-// MENU ITEMS, one file per dish. `menu` decides which page it appears on.
-const menu = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/menu' }),
-  schema: z.object({
-    name: z.string(),
-    description: z.string().optional(),
-    price: z.string(), // kept as text so "£10" / "2 for £16.50" both work
-    category: z.string(), // e.g. "Starters", "Mains", "Desserts"
-    menu: z.enum(['main', 'oap', 'kids', 'specials']),
-    order: z.number().default(0),
-  }),
-});
+// NOTE: menu content is NOT a CMS collection — it lives in code at
+// src/config/menuData.ts (the full menu is large and rarely changes).
 
-export const collections = { specials, events, menu };
+export const collections = { specials, events };
