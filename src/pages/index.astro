@@ -9,10 +9,10 @@ import MenusSection from '../components/MenusSection.astro';
 import Specials from '../components/Specials.astro';
 import Events from '../components/Events.astro';
 import Functions from '../components/Functions.astro';
-import Contact from '../components/Contact.astro';
+import BookCta from '../components/BookCta.astro';
 import PortcullisDivider from '../components/PortcullisDivider.astro';
 import Footer from '../components/Footer.astro';
-import { withBase } from '../config/site';
+import { site, withBase } from '../config/site';
 
 // Quick-link cards to the remaining pages.
 const explore = [
@@ -76,18 +76,23 @@ const explore = [
       </div>
     </section>
 
-    <!-- Find us -->
-    <section class="bg-porty-cream pt-16 sm:pt-24">
-      <div class="mx-auto max-w-2xl px-4 text-center sm:px-6" data-reveal>
-        <p class="eyebrow">Find Us</p>
-        <h2 class="mt-3 font-display text-3xl font-semibold text-porty-red sm:text-4xl">Come On In</h2>
-        <p class="mt-4 text-lg text-porty-dark/80">
-          We're in the heart of Arbroath. Pop in, give us a call, or email to book your table.
-        </p>
-        <PortcullisDivider class="mt-6" />
+    <!-- Find us teaser -->
+    <section class="bg-porty-dark px-4 py-16 text-center text-porty-cream sm:px-6 sm:py-24">
+      <div class="mx-auto max-w-2xl" data-reveal>
+        <p class="font-body text-xs font-bold uppercase tracking-[0.22em] text-porty-gold">Find Us</p>
+        <h2 class="mt-3 font-display text-3xl font-semibold sm:text-4xl">Come On In</h2>
+        <address class="mt-4 not-italic text-lg text-porty-cream/85">
+          {site.address.street}, {site.address.town}, {site.address.postcode}
+        </address>
+        <p class="mt-1 text-porty-cream/70">Bookings by phone or email, we'll get you sorted.</p>
+        <div class="mt-8 flex flex-col items-center gap-4">
+          <BookCta variant="gold" onDark />
+          <a href={withBase('/find-us')} class="text-sm font-semibold text-porty-gold underline underline-offset-4 hover:text-porty-cream">
+            Opening hours, directions &amp; map
+          </a>
+        </div>
       </div>
     </section>
-    <Contact />
   </main>
   <Footer />
 </BaseLayout>

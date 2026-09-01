@@ -99,7 +99,7 @@ export const images = {
   functions: withBase('/images/function-room.jpg'), // functions section
   games: withBase('/images/games-room.jpg'), // games room section
   contact: withBase('/images/outside.jpg'), // find us / contact
-  logo: withBase('/images/logo.png'), // crest logo (transparent PNG)
+  logo: withBase('/images/logo.webp'), // crest logo (transparent)
 } as const;
 
 // Menu content lives in src/config/menuData.ts (menuData + menuCards).
