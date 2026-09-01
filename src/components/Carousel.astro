@@ -1,0 +1,117 @@
+---
+/* Lightweight image carousel. Native horizontal scroll-snap = smooth swipe on
+   mobile with no library. Arrows on larger screens, dots below, and gentle
+   autoplay that pauses on interaction (and is disabled for reduced-motion).
+   Mixed portrait/landscape photos are shown in one consistent frame via
+   object-cover, so it stays tidy whatever the source shape.
+
+   Props: images (array of src URLs), alt (base alt text). */
+interface Props {
+  images: string[];
+  alt?: string;
+  class?: string;
+}
+const { images, alt = 'The Portcullis, Arbroath', class: extra = '' } = Astro.props;
+---
+
+<div data-carousel class:list={['relative', extra]}>
+  <div class="overflow-hidden rounded-3xl shadow-xl ring-1 ring-porty-gold/20">
+    <div
+      data-track
+      class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    >
+      {
+        images.map((src, i) => (
+          <div class="min-w-full snap-start">
+            <img
+              src={src}
+              alt={`${alt} ${i + 1}`}
+              class="block aspect-[4/5] w-full object-cover object-center sm:aspect-[16/10]"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Arrows (larger screens; mobile uses swipe) -->
+  <button
+    type="button"
+    data-prev
+    aria-label="Previous photo"
+    class="absolute left-3 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-porty-dark/55 text-porty-cream backdrop-blur-sm transition hover:bg-porty-dark/80 sm:flex"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+  </button>
+  <button
+    type="button"
+    data-next
+    aria-label="Next photo"
+    class="absolute right-3 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-porty-dark/55 text-porty-cream backdrop-blur-sm transition hover:bg-porty-dark/80 sm:flex"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+  </button>
+
+  <!-- Dots -->
+  <div class="mt-4 flex items-center justify-center gap-2">
+    {
+      images.map((_, i) => (
+        <button
+          type="button"
+          data-dot
+          aria-label={`Go to photo ${i + 1}`}
+          aria-current={i === 0 ? 'true' : 'false'}
+          class="h-2.5 w-2.5 rounded-full bg-porty-cream/35 transition-all duration-200 aria-[current=true]:w-6 aria-[current=true]:bg-porty-gold"
+        />
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-track]');
+    if (!track) return;
+    const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-dot]'));
+    const count = dots.length;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let index = 0;
+
+    const go = (i: number) => {
+      index = ((i % count) + count) % count;
+      track.scrollTo({ left: index * track.clientWidth, behavior: 'smooth' });
+    };
+
+    // Keep dots in sync as the user swipes.
+    let raf = 0;
+    track.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        index = Math.round(track.scrollLeft / track.clientWidth);
+        dots.forEach((d, di) => d.setAttribute('aria-current', di === index ? 'true' : 'false'));
+      });
+    });
+
+    root.querySelector('[data-prev]')?.addEventListener('click', () => go(index - 1));
+    root.querySelector('[data-next]')?.addEventListener('click', () => go(index + 1));
+    dots.forEach((d, di) => d.addEventListener('click', () => go(di)));
+
+    // Gentle autoplay, paused on interaction.
+    if (!reduce && count > 1) {
+      let timer: number | null = window.setInterval(() => go(index + 1), 4500);
+      const stop = () => {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+      };
+      const start = () => {
+        if (!timer) timer = window.setInterval(() => go(index + 1), 4500);
+      };
+      root.addEventListener('pointerenter', stop);
+      root.addEventListener('pointerleave', start);
+      root.addEventListener('touchstart', stop, { passive: true });
+      root.addEventListener('focusin', stop);
+    }
+  });
+</script>

@@ -1,8 +1,18 @@
 ---
-/* Functions, the function suite. Enquiries by phone or email. Image on one
-   side, details on the other. */
-import { images } from '../config/site';
+/* Functions, the function suite. Enquiries by phone or email. Photo carousel
+   on one side, details on the other. */
+import { withBase } from '../config/site';
 import BookCta from './BookCta.astro';
+import Carousel from './Carousel.astro';
+
+const functionPhotos = [
+  'specialevent.webp',
+  'birthdayparties.webp',
+  'wedding.jpg',
+  'babyshower.webp',
+  'sporting-event.webp',
+  'funeral.webp',
+].map((f) => withBase(`/images/functions/${f}`));
 
 const occasions = [
   'Birthdays',
@@ -18,17 +28,11 @@ const occasions = [
 
 <section id="functions" class="scroll-mt-20 bg-porty-dark px-4 py-16 text-porty-cream sm:px-6 sm:py-24">
   <div class="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
-    <div data-reveal class="order-2 overflow-hidden rounded-3xl shadow-xl ring-1 ring-porty-gold/20 lg:order-1">
-      <img
-        src={images.functions}
-        alt="The function room at The Portcullis, set up for a celebration"
-        class="h-full w-full object-cover"
-        loading="lazy"
-        decoding="async"
-        width="1200"
-        height="900"
-      />
-    </div>
+    <Carousel
+      images={functionPhotos}
+      alt="A function or celebration at The Portcullis, Arbroath"
+      class="order-2 lg:order-1"
+    />
 
     <div data-reveal class="order-1 lg:order-2">
       <p class="font-body text-xs font-bold uppercase tracking-[0.22em] text-porty-gold">
