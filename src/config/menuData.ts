@@ -24,7 +24,7 @@ export interface MenuCategory {
 }
 
 export interface MenuData {
-  slug: 'main' | 'oap' | 'kids' | 'specials';
+  slug: 'main' | 'breakfast' | 'oap' | 'kids' | 'specials' | 'christmas-day';
   title: string;
   card: string; // short blurb for the menu card
   blurb: string; // intro shown under the page title
@@ -128,6 +128,100 @@ export const menuData: MenuData[] = [
   },
 
   {
+    slug: 'breakfast',
+    title: 'Breakfast Menu',
+    card: 'Start your day like a knight. Served weekends, 10am–12pm.',
+    blurb: 'Start your day like a knight. Served Saturday & Sunday, 10am to 12pm.',
+    legend: 'V Vegetarian · VE Vegan · GF Gluten Free',
+    footnote: allergyNote,
+    categories: [
+      {
+        name: 'Set Breakfast',
+        items: [
+          { name: 'Full Set Breakfast', description: '2 bacon, 1 sausage, 1 egg, black pudding, beans, tattie scone and toast', price: '£8.00' },
+        ],
+      },
+      {
+        name: 'Add-ons',
+        items: [
+          { name: 'Mushroom', price: '£0.60' },
+          { name: 'Tomato', price: '£0.60' },
+          { name: 'Bacon', price: '£1.00' },
+          { name: 'Lorne', price: '£1.00' },
+          { name: 'Black Pudding', price: '£1.00' },
+          { name: 'Sausage', price: '£1.00' },
+          { name: 'Fried Egg', price: '£0.80' },
+        ],
+      },
+      {
+        name: 'On Toast',
+        items: [
+          { name: 'Scrambled Eggs on Toast', tags: 'GF, V', price: '£4.00' },
+          { name: 'Poached Eggs on Toast', tags: 'GF, V', price: '£3.50' },
+          { name: 'Toast & Jam', tags: 'GF, V', price: '£2.50' },
+        ],
+      },
+      {
+        name: 'Pancakes',
+        note: 'Three pancakes',
+        items: [
+          { name: 'Bacon & Maple Syrup', price: '£6.50' },
+          { name: 'Banana & Chocolate Spread', tags: 'V', price: '£5.50' },
+        ],
+      },
+      {
+        name: 'Omelettes',
+        note: 'All omelettes GF',
+        items: [
+          { name: 'Plain', tags: 'V', price: '£3.50' },
+          { name: 'Ham', price: '£4.50' },
+          { name: 'Mushroom', tags: 'V', price: '£3.70' },
+          { name: 'Tomato', tags: 'V', price: '£3.70' },
+          { name: 'Onion', tags: 'V', price: '£3.70' },
+          { name: 'Cheese', tags: 'V', price: '£4.70' },
+          { name: 'Add a side of beans', price: '£1.20' },
+        ],
+      },
+      {
+        name: 'Filled Rolls',
+        items: [
+          { name: 'Bacon (2)', price: '£4.00' },
+          { name: 'Lorne (1)', price: '£3.15' },
+          { name: 'Black Pudding (2)', price: '£3.90' },
+          { name: 'Sausage (2)', price: '£3.50' },
+          { name: 'Fried Egg (1)', tags: 'V', price: '£2.00' },
+        ],
+      },
+      {
+        name: 'Build Your Roll',
+        items: [
+          { name: 'Double Up', description: 'Per roll', price: '+£2.00' },
+          { name: 'Triple Up', description: 'Per roll', price: '+£3.00' },
+        ],
+      },
+      {
+        name: 'Hot Drinks',
+        items: [
+          { name: 'Tea', description: 'Refillable', price: '£2.00' },
+          { name: 'Coffee', description: 'Refillable', price: '£2.10' },
+          { name: 'Latte', price: '£3.00' },
+          { name: 'Espresso', price: '£2.50' },
+          { name: 'Cappuccino', price: '£3.20' },
+          { name: 'Flat White', price: '£3.00' },
+          { name: 'Flavoured Tea', description: 'Ask staff for available options', price: '£3.00' },
+          { name: 'Hot Chocolate', price: '£3.00' },
+        ],
+      },
+      {
+        name: 'Extras',
+        items: [
+          { name: 'Coffee Syrups', price: '£0.50' },
+        ],
+      },
+    ],
+  },
+
+  {
     slug: 'oap',
     title: "Pensioners' Lunchtime Special",
     card: 'Three courses for £10, weekday lunchtimes.',
@@ -161,14 +255,6 @@ export const menuData: MenuData[] = [
           { name: 'Spotted Dick', description: 'Traditional steamed suet pudding with dried fruits' },
         ],
       },
-      {
-        name: 'Beverage',
-        note: 'Choose one',
-        items: [
-          { name: 'Tea', description: 'Traditional black tea with milk' },
-          { name: 'Coffee', description: 'Freshly brewed coffee, served black or with milk' },
-        ],
-      },
     ],
   },
 
@@ -199,9 +285,9 @@ export const menuData: MenuData[] = [
   {
     slug: 'specials',
     title: 'The Portcullis Weekday Deal',
-    card: '2 courses £16.50 or 3 for £21, Monday to Friday.',
+    card: '2 courses £17.50 or 3 for £22, Monday to Friday.',
     blurb: 'Great value, any weekday.',
-    deal: '2 Courses £16.50 · 3 Courses £21.00',
+    deal: '2 Courses £17.50 · 3 Courses £22.00',
     availability: 'Monday to Friday',
     footnote: allergyNote,
     categories: [
@@ -234,6 +320,53 @@ export const menuData: MenuData[] = [
           { name: 'Ice Cream or Sorbet', tags: 'V, VE, GF', description: 'Creamy vanilla, chocolate or strawberry ice cream, or mango, lemon or raspberry sorbet' },
           { name: 'Apple and Cinnamon Crumble', tags: 'V', description: 'Warm apple crumble with a spiced cinnamon twist' },
           { name: 'Hot Chocolate Fudge Cake', tags: 'V', description: 'Decadent chocolate cake served warm with chocolate sauce' },
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: 'christmas-day',
+    title: 'Christmas Day',
+    card: 'Friday 25th December — a festive three-course lunch. Adults £70, children £30.',
+    blurb: 'Make Christmas Day special at The Portcullis with a festive three-course menu of traditional favourites, seasonal dishes and indulgent desserts — plus a complimentary glass of fizz on arrival.',
+    deal: 'Adults £70 · Children £30',
+    intro: 'Friday 25th December 2026',
+    availability: 'Bookings 2pm–6pm · Advance booking & 50% deposit required',
+    legend: 'V Vegetarian · VG Vegan · GF Gluten Free',
+    footnote: allergyNote,
+    categories: [
+      {
+        name: 'Starters',
+        note: 'Choose one',
+        items: [
+          { name: 'Lentil Soup', tags: 'V, VG', description: 'Crusty bread & butter' },
+          { name: 'Prawn Cocktail', description: 'Marie Rose sauce & garnish' },
+          { name: 'Halloumi & Bacon Twists', tags: 'GF', description: 'Sweet chilli sauce & garnish' },
+          { name: 'Black Pudding & Haggis Bon Bons', description: 'Peppercorn sauce & garnish' },
+        ],
+      },
+      {
+        name: 'Mains',
+        note: 'Choose one',
+        items: [
+          { name: 'Steak Pie', description: 'Seasonal vegetables, new potatoes & roast potatoes' },
+          { name: 'Traditional Roast Turkey Dinner', description: 'With all the trimmings' },
+          { name: 'Balmoral Chicken', description: 'New potatoes, roast potatoes & seasonal vegetables' },
+          { name: 'Haddock Mornay', description: 'New potatoes, roast potatoes & seasonal vegetables' },
+          { name: 'Mushroom & Sweet Potato Wellington', tags: 'V, VG', description: 'With Christmas trimmings' },
+        ],
+      },
+      {
+        name: 'Desserts',
+        note: 'Choose one',
+        items: [
+          { name: 'Apple & Cinnamon Crumble', tags: 'V', description: 'Ice cream or custard' },
+          { name: 'Chocolate Orange Cheesecake', description: 'Cream or ice cream' },
+          { name: 'Christmas Pudding', description: 'Ice cream or brandy sauce' },
+          { name: 'Winter Berry Meringue' },
+          { name: 'Selection of Ice Cream', tags: 'V, VG, GF', description: 'Vanilla, chocolate or strawberry' },
+          { name: 'Selection of Sorbet', tags: 'V, VG, GF', description: 'Raspberry, mango or lemon' },
         ],
       },
     ],
