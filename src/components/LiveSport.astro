@@ -1,0 +1,90 @@
+---
+/* Live Sport, we show the big games on the big screens. Sky Sports & TNT Sports.
+   Broadcaster names are shown as styled text badges for now; swap in the
+   official Sky Business / TNT Sports venue logos when those files land in
+   public/images/ (see the `broadcasters` array below). */
+import { withBase } from '../config/site';
+
+// Broadcaster badges. Give each an optional `logo` (path under public/images/)
+// once you have the official venue-marketing artwork, and it'll replace the
+// text badge automatically.
+const broadcasters = [
+  { name: 'Sky Sports', logo: '' },
+  { name: 'TNT Sports', logo: '' },
+] as const;
+
+const shown = [
+  'Premier League',
+  'Champions League',
+  'EFL & Scottish football',
+  'Six Nations & rugby',
+  'Big fight nights',
+];
+---
+
+<section id="sport" class="scroll-mt-20 bg-porty-cream px-4 py-16 sm:px-6 sm:py-24">
+  <div class="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
+    <div data-reveal>
+      <p class="eyebrow">Live &amp; Loud</p>
+      <h2 class="mt-3 font-display text-3xl font-semibold text-porty-red sm:text-4xl">
+        Live Sport at The Porty
+      </h2>
+      <p class="mt-5 text-lg leading-relaxed text-porty-dark/85">
+        Never miss a game. We show all the big fixtures live on the big screens
+        with <strong>Sky Sports</strong> and <strong>TNT Sports</strong>, so grab
+        a pint, grab a seat and cheer them on with us.
+      </p>
+
+      <!-- Broadcaster badges -->
+      <div class="mt-7 flex flex-wrap items-center gap-3">
+        {
+          broadcasters.map((b) =>
+            b.logo ? (
+              <img
+                src={withBase(b.logo)}
+                alt={`${b.name} shown here`}
+                class="h-10 w-auto"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <span class="inline-flex items-center rounded-lg bg-porty-red px-4 py-2 font-display text-lg font-semibold tracking-wide text-porty-cream shadow-sm ring-1 ring-porty-red/20">
+                {b.name}
+              </span>
+            )
+          )
+        }
+      </div>
+
+      <ul class="mt-8 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
+        {
+          shown.map((s) => (
+            <li class="flex items-center gap-2.5 text-porty-dark/85">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4 shrink-0 text-porty-gold" aria-hidden="true">
+                <path d="M5 13l4 4L19 7" />
+              </svg>
+              {s}
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="mt-8 text-porty-dark/75">
+        Got a must-see match coming up? Give us a call to check we're showing it
+        and to reserve your table.
+      </p>
+    </div>
+
+    <div data-reveal class="overflow-hidden rounded-3xl shadow-xl shadow-porty-red/10 ring-1 ring-porty-red/10">
+      <img
+        src={withBase('/images/gallery/footballtv.webp')}
+        alt="Live football on the big screen at The Portcullis, Arbroath"
+        class="h-full w-full object-cover"
+        loading="lazy"
+        decoding="async"
+        width="1200"
+        height="900"
+      />
+    </div>
+  </div>
+</section>
